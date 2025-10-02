@@ -26,13 +26,25 @@ on this code.
 I did find however that good soldering joints and wiring makes all the difference,
 so if you get resets you cannot explain, please have a second look at your wiring.
 
-This repository contains a proof-of-concept implementation of a single channel LoRaWAN gateway for the ESP8266. 
+This repository contains a proof-of-concept implementation of a single channel LoRaWAN gateway for the ESP8266.
 Starting version 5.2 also the ESP32 of TTGO (and others) is supported.
 The software implements a standard LoRa gateway with the following exceptions and changes:
 
--  This LoRa gateway is not a full gateway but it implements just a one-channel/one frequency gateway. 
+## ESP32 modem control console
+
+If you just need a lightweight way to drive an SX1276/78 based modem from an ESP32 without connecting to TTN,
+take a look at the `ESP32-simple-modem` sketch that is included with this repository. The sketch exposes a
+serial console that lets you configure the radio (frequency, spreading factor, bandwidth, coding rate and transmit
+power) and inspect register values without enabling the full single channel gateway stack. This is useful when you
+only want to validate the wiring of a LoRa module or integrate it with your own firmware.
+
+To get started open `ESP32-simple-modem/ESP32-simple-modem.ino` in the Arduino IDE, update the pin mapping at the
+top of the sketch so it matches your ESP32 board, upload it, and then use the serial monitor to send commands such
+as `status`, `freq 915.0`, `sf 9`, `bw 500`, or `dump 0x1d 0x26`.
+
+-  This LoRa gateway is not a full gateway but it implements just a one-channel/one frequency gateway.
 The minimum amount of frequencies supported by a full gateway is 3, most support 9 or more frequencies.
-This software started as a proof-of-concept to prove that a single low-cost RRFM95 chip which was present 
+This software started as a proof-of-concept to prove that a single low-cost RRFM95 chip which was present
 in almost every LoRa node in Europe could be used as a cheap alternative to the far more expensive full 
 gateways that were making use of the SX1301 chip.
 
