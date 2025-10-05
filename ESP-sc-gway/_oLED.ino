@@ -35,8 +35,22 @@ void init_oLED()
 	delay(50); 
 	digitalWrite(OLED_RST, HIGH); 	// must be high to turn on OLED
 	delay(50);
-#else
 #endif
+
+#if OLED==3
+	if (!display.init()) {
+#if DUSB>=1
+		Serial.println(F("OLED init failed"));
+#endif
+		return;
+	}
+	display.flipScreenVertically();
+	display.setFont(&Heltec_Arial24);
+	display.setTextAlignment(TEXT_ALIGN_LEFT);
+	display.clear();
+	display.drawString(0, 24, "STARTING");
+	display.display();
+#else
 	// Initialising the UI will init the display too.
 	display.init();
 	display.flipScreenVertically();
@@ -44,6 +58,7 @@ void init_oLED()
 	display.setTextAlignment(TEXT_ALIGN_LEFT);
 	display.drawString(0, 24, "STARTING");
 	display.display();
+#endif
 }
 
 // ----------------------------------------------------------------
@@ -63,6 +78,11 @@ void acti_oLED()
 	display.setFont(ArialMT_Plain_16);
 	display.drawString(0, 16, "READY,  SSID=");
 	display.drawString(0, 32, WiFi.SSID());
+#elif OLED==3
+	display.setFont(&Heltec_Arial16);
+	display.setTextAlignment(TEXT_ALIGN_LEFT);
+	display.drawString(0, 16, "READY,  SSID=");
+	display.drawString(0, 32, WiFi.SSID());
 #endif
 
 	display.display();
@@ -75,9 +95,13 @@ void acti_oLED()
 // ----------------------------------------------------------------
 void msg_oLED(String tim, String sf) {
     display.clear();
+#if OLED==3
+    display.setFont(&Heltec_Arial16);
+#else
     display.setFont(ArialMT_Plain_16);
+#endif
     display.setTextAlignment(TEXT_ALIGN_LEFT);
-	
+
 	display.drawString(0, 48, "LEN: " );
 //    display.drawString(40, 48, String((int)messageLength) );
     display.display();

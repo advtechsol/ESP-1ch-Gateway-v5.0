@@ -65,4 +65,14 @@ SSD1306  display(OLED_ADDR, OLED_SDA, OLED_SCL);// i2c ADDR & SDA, SCL on wemos
 SH1106  display(OLED_ADDR, OLED_SDA, OLED_SCL);	// i2c ADDR & SDA, SCL on wemos
 #endif
 
+#if OLED==3
+#include "heltec_oled.h"
+#define OLED_ADDR 0x3C
+#ifdef OLED_RST
+HeltecSSD1306 display(OLED_ADDR, OLED_SDA, OLED_SCL, OLED_RST);
+#else
+HeltecSSD1306 display(OLED_ADDR, OLED_SDA, OLED_SCL);
+#endif
+#endif
+
 #endif//OLED>=1
