@@ -50,7 +50,7 @@
 #include <FS.h>									// ESP8266 Specific
 #include <WiFiUdp.h>
 #include <pins_arduino.h>
-#include <gBase64.h>							// https://github.com/adamvr/arduino-base64 (changed the name)
+#include <Base64.h>							// https://github.com/adamvr/arduino-base64 (changed the name)
 
 // Local include files
 #include "loraModem.h"
@@ -80,11 +80,11 @@ extern "C" {
 #include <ESPmDNS.h>
 #include <SPIFFS.h>
 #if A_SERVER==1
-#include <ESP32WebServer.h>						// Dedicated Webserver for ESP32
-#include <Streaming.h>          				// http://arduiniana.org/libraries/streaming/
+#include <ESP32WebServer.h>						// https://github.com/Pedroalbuquerque/ESP32WebServer
+#include <Streaming.h>          				// https://github.com/janelia-arduino/Streaming
 #endif
 #if A_OTA==1
-#include <ESP32httpUpdate.h>					// Not yet available
+#include <ESP32httpUpdate.h>					// https://github.com/suculent/esp32-http-update
 #include <ArduinoOTA.h>
 #endif//OTA
 
@@ -128,8 +128,6 @@ HardwareSerial Serial1(1);
 	ESP8266WebServer server(A_SERVERPORT);
 #endif
 #endif
-using namespace std;
-
 byte currentMode = 0x81;
 
 bool sx1272 = true;								// Actually we use sx1276/RFM95
@@ -1069,7 +1067,7 @@ void setup() {
 #endif
 
 	WiFi.mode(WIFI_STA);
-	WiFi.setAutoConnect(true);
+	WiFi.setAutoReconnect(true);
 	//WiFi.begin();
 	
 	WlanReadWpa();								// Read the last Wifi settings from SPIFFS into memory
