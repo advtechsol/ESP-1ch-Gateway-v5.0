@@ -408,7 +408,11 @@ int buildPacket(uint32_t tmst, uint8_t *buff_up, struct LoraUp LoraUp, bool inte
     sprintf(timBuff, "%02i:%02i:%02i", hour(), minute(), second());
 	
     display.clear();
+#if OLED==3
+    display.setFont(&Heltec_Arial16);
+#else
     display.setFont(ArialMT_Plain_16);
+#endif
     display.setTextAlignment(TEXT_ALIGN_LEFT);
 
 //	msg_oLED(timBuff, prssi-rssicorr, SNR, message)

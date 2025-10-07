@@ -992,7 +992,7 @@ void setup() {
 	char MAC_char[19];								// XXX Unbelievable
 	MAC_char[18] = 0;
 
-	Serial.begin(_BAUDRATE);						// As fast as possible for bus
+	Serial.begin(115200);						// As fast as possible for bus
 	delay(100);	
 
 #if _GPS==1

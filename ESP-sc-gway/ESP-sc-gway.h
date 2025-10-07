@@ -129,13 +129,21 @@
 // +SPI is input for SPI, SPO is output for SPI
 #define MUTEX 0
 
-// Define if OLED Display is connected to I2C bus. Note that defining an OLED display does not
-// impact performance very much, certainly if no OLED is connected. Wrong OLED will not show
-// sensible results on display
-// OLED==0; No OLED display connected
-// OLED==1; 0.9 Oled Screen based on SSD1306
-// OLED==2;	1"3 Oled screens for Wemos, 128x64 SH1106
-#define OLED 2
+// Define if an OLED display should be compiled in.
+// Set USE_OLED to 1 to enable OLED support, 0 to strip it entirely.
+#define USE_OLED 0
+
+// When USE_OLED==1 choose the panel flavour here:
+// 1: SSD1306 based 0.9" panel
+// 2: SH1106 based 1.3" panel
+// 3: Bundled Heltec-style 0.96" SSD1306 driver
+#define OLED_TYPE 3
+
+#if USE_OLED
+#define OLED OLED_TYPE
+#else
+#define OLED 0
+#endif
 
 
 // Define whether we want to manage the gateway over UDP (next to management 

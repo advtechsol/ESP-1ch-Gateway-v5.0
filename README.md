@@ -29,7 +29,7 @@ This repository hosts the firmware we run on ESP8266 and ESP32 boards to build a
    - Set Wi-Fi credentials in the `wpas` array.
    - Choose your pin mapping with `_PIN_OUT` or customise `loraModem.h`.
    - Set `_LFREQ`, `_SPREADING`, and other radio defaults if you need different regional settings.
-4. (Optional) Enable extras like OTA (`A_OTA`), OLED support (`OLED`), or strict single-channel operation (`_STRICT_1CH`). When using the bundled Heltec-style SSD1306 driver (`OLED == 3`), no external libraries are required.
+4. (Optional) Enable extras like OTA (`A_OTA`), OLED support (`USE_OLED` + `OLED_TYPE`), or strict single-channel operation (`_STRICT_1CH`). When using the bundled Heltec-style SSD1306 driver (`OLED_TYPE == 3`), no external libraries are required.
 5. Select the correct board/port and upload. Watch the serial console (115200 baud) for first boot status and the assigned IP address.
 6. Point a browser at `http://<gateway-ip>/` to finish runtime configuration and monitor packets.
 
